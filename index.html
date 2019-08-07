@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Drivers lab</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+<script>
+        $(document).ready(function() {
+            $("#result").toggleClass("result");
+
+            //torque
+            $("#torque").click(function() {
+                var w = $("#weight").val();
+                var d = $("#diameter").val();
+                var s = $("#speed").val();
+                var c= $("#charge").val();
+                var v = $("#voltage").val();
+                
+                var r=(d/39.37)/2;
+                var a=(s/3.6)/20;
+                var f=w*a;
+                var  t=f*r;
+                t=t.toFixed(2);
+
+                $("#result").html(+t+" Nm");
+
+            });
+
+            //power
+            $("#power").click(function() {
+                var w = $("#weight").val();
+                var d = $("#diameter").val();
+                var s = $("#speed").val();
+                var c= $("#charge").val();
+                var v = $("#voltage").val();
+
+                 var sp=(s/3.6);
+                 var r=(d/39.37)/2;
+                var a=(s/3.6)/20;
+                var f=w*a;
+                var  t=f*r;
+                var p=(t*sp);
+                p=p.toFixed(2);
+
+
+
+                $("#result").html(+p +" W");
+            });
+
+            //battery
+            $("#batterycap").click(function() {
+                var w = $("#weight").val();
+                var d = $("#diameter").val();
+                var s = $("#speed").val();
+                var c= $("#charge").val();
+                var v = $("#voltage").val();
+
+                 var sp=(s/3.6);
+                 var r=(d/39.37)/2;
+                var a=(s/3.6)/20;
+                var f=w*a;
+                var  t=f*r;
+                var p=(t*sp)/1000;
+
+                p=p.toFixed(2);
+                var wh=(p/s)*1000;
+                var amp=wh/v;
+                var ampier=c*amp;
+
+                var li=ampier*1.05;
+                var le=ampier*1.8;
+                
+                li=li.toFixed(2);
+
+                le=le.toFixed(2);
+
+                $("#result").html("lithium:"+li+" AH  "+"  lead:"+le+" AH");
+                 
+            });
+
+            
+
+        });
+    $(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+    </script>
+	<style>
+	 .result {
+            font-size: xx-large;
+            color: red;
+        }
+	</style>
+</head>
+<body>
+      <center><h1>Drivers Lab</h1></center>
+	<div class="contact1">
+		<div class="container-contact1">
+            <div class="contact1-pic js-tilt" data-tilt>
+                <img src="download.png" alt="IMG">
+            </div>
+
+
+
+			<center>
+
+
+			<form class="contact1-form validate-form">
+				<span class="contact1-form-title">
+					ELECTRICAL VEHICLE CALCULATOR
+				</span>
+
+				<div class="wrap-input1 validate-input">
+					 Weight<input class="input1" type="text" id="weight" placeholder="KG"> 
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input" >
+					wheel's diameter<input class="input1" type="text" id="diameter" placeholder="INCH"> 
+					<span class="shadow-input1"></span>
+				</div>
+				<div class="wrap-input1 validate-input" >
+					Speed of motor<input class="input1" type="text" id="speed" placeholder="KM/H"> 
+					<span class="shadow-input1"></span>
+				</div>
+				<div class="wrap-input1 validate-input">
+					Motor Voltage<div class="wrap-input1 validate-input">
+					<input class="input1" type="text" id="voltage" placeholder="V"> 
+					<span class="shadow-input1"></span>
+				</div>
+					<span class="shadow-input1"></span>
+				</div>
+
+				<div class="wrap-input1 validate-input" >
+					 KM per Charge of battery<input class="input1" type="text" id="charge" placeholder="Kms"> 
+					<span class="shadow-input1"></span>
+				</div>
+				<div class="container-contact1-form-btn">
+					<button class="contact1-form-btn" type="button" id="torque"> Torque </button>   <button class="contact1-form-btn" type="button" id="power">Motor Power </button>  
+                    <button class="contact1-form-btn" type="button" id="batterycap"> Battery capacity </button>
+				</div>
+				 <h2>Result</h2>
+        <p id="result"></p>
+			</form>
+            </center>
+		</div>
+	</div>
+
+
+</body>
+</html>
